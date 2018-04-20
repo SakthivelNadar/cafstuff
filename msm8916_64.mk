@@ -189,8 +189,11 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.0-service \
     android.hardware.power@1.0-impl
 
+# TARGET_DISABLE_TA_HEAP for 8916_32
+TARGET_DISABLE_TA_HEAP := true
+
 KMGK_USE_QTI_SERVICE := false
-#Enable KEYMASTER and GATEKEEPER HIDLs
+#Enable Google KEYMASTER and GATEKEEPER HIDLs
 ifneq ($(KMGK_USE_QTI_SERVICE), true)
   PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-impl \
                       android.hardware.gatekeeper@1.0-service \

@@ -106,6 +106,8 @@ TARGET_INIT_VENDOR_LIB := libinit_msm
 #add suffix variable to uniquely identify the board
 TARGET_BOARD_SUFFIX := _64
 
+TARGET_VB_NOT_ENABLED := true
+
 #Enable HW based full disk encryption
 #TARGET_HW_DISK_ENCRYPTION := false
 
@@ -117,12 +119,9 @@ TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 MAX_VIRTUAL_DISPLAY_DIMENSION := 2048
 
 # Enable sensor multi HAL
-#USE_SENSOR_MULTI_HAL := true
+USE_SENSOR_MULTI_HAL := true
 
 FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true
-
-# Control flag between KM versions
-TARGET_HW_KEYMASTER_V03 := true
 
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
