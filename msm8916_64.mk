@@ -9,9 +9,6 @@ TARGET_USES_HWC2 := true
 # Add QC Video Enhancements flag
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := false
 
-#QTIC flag
--include $(QCPATH)/common/config/qtic-config.mk
-
 #for android_filesystem_config.h
 PRODUCT_PACKAGES += \
     fs_config_files

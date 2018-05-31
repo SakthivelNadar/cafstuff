@@ -11,14 +11,12 @@ TARGET_KERNEL_APPEND_DTB := true
 
 USE_CLANG_PLATFORM_BUILD := true
 BOARD_USES_GENERIC_AUDIO := true
-USE_CAMERA_STUB := true
 TARGET_DISABLE_DASH := true
 
 -include $(QCPATH)/common/msm8916/BoardConfigVendor.mk
 
 # bring-up overrides
 BOARD_USES_GENERIC_AUDIO := true
-USE_CAMERA_STUB := true
 
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_ARCH := arm64
