@@ -4,7 +4,7 @@ TARGET_USES_QCOM_BSP := false
 
 TARGET_USES_HWC2 := true
 
-#DEVICE_PACKAGE_OVERLAYS := device/qcom/msm8916_64/overlay
+DEVICE_PACKAGE_OVERLAYS := device/qcom/msm8916_64/overlay
 
 # Add QC Video Enhancements flag
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := false
@@ -17,9 +17,11 @@ PRODUCT_PACKAGES += \
 TARGET_USES_MEDIA_EXTENSIONS := true
 
 # media_profiles and media_codecs xmls for 8916
-ifeq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
+ifneq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS), true)
+
 PRODUCT_COPY_FILES += device/qcom/msm8916_32/media/media_profiles_8916.xml:system/etc/media_profiles.xml \
-                      device/qcom/msm8916_32/media/media_codecs_8916.xml:system/etc/media_codecs.xml \
+                      device/qcom/msm8916_32/media/media_codecs_8916.xml:system/vendor/etc/media_codecs.xml \
+                      device/qcom/msm8916_32/media/media_profiles_8916.xml:system/vendor/etc/media_profiles.xml \
                       device/qcom/msm8916_32/media/media_codecs_performance_8916_64.xml:system/etc/media_codecs_performance.xml \
                       device/qcom/msm8916_32/media/media_codecs_performance_8929.xml:system/etc/media_codecs_performance_8929.xml \
                       device/qcom/msm8916_32/media/media_codecs_8939.xml:system/etc/media_codecs_8939.xml \
@@ -76,6 +78,13 @@ PRODUCT_CHARACTERISTICS := nosdcard
 #Android EGL implementation
 PRODUCT_PACKAGES += libGLES_android
 
+# Feature definition files for msm8916
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml
 
 PRODUCT_PACKAGES += \
     libqcomvisualizer \
@@ -157,6 +166,24 @@ PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service \
 
+#HBTP
+PRODUCT_PACKAGES += hbtp_daemon
+PRODUCT_PACKAGES += libhbtpclient.so
+PRODUCT_PACKAGES += libhbtpfrmwk.so
+PRODUCT_PACKAGES += libhbtparm.so
+PRODUCT_PACKAGES += libafehal_5_rohm_v3.so
+PRODUCT_PACKAGES += hbtp_8939_5_rohm_v3.cfg
+PRODUCT_PACKAGES += hbtpcfg_8939_5_rohm_v3.dat
+PRODUCT_PACKAGES += libafehal_5_rohm_v4.so
+PRODUCT_PACKAGES += hbtp_8939_5_rohm_v4.cfg
+PRODUCT_PACKAGES += hbtpcfg_8939_5_rohm_v4.dat
+PRODUCT_PACKAGES += libafehal_5p5_rohm_v4.so
+PRODUCT_PACKAGES += hbtp_8939_5p5_rohm_v4.cfg
+PRODUCT_PACKAGES += hbtpcfg_8939_5p5_rohm_v4.dat
+PRODUCT_PACKAGES += libafehal_6_rohm_v3.so
+PRODUCT_PACKAGES += hbtp_8939_6_rohm_v3.cfg
+PRODUCT_PACKAGES += hbtpcfg_8939_6_rohm_v3.dat
+
 #Boot control HAL test app
 PRODUCT_PACKAGES_DEBUG += bootctl
 
@@ -186,6 +213,12 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.0-service \
     android.hardware.power@1.0-impl
 
+# Camera configuration file. Shared by passthrough/binderized camera HAL
+PRODUCT_PACKAGES += camera.device@1.0-impl
+PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
+# Enable binderized camera HAL
+PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service
+
 # TARGET_DISABLE_TA_HEAP for 8916_32
 TARGET_DISABLE_TA_HEAP := true
 
@@ -197,4 +230,3 @@ ifneq ($(KMGK_USE_QTI_SERVICE), true)
                       android.hardware.keymaster@3.0-impl \
                       android.hardware.keymaster@3.0-service
 endif
-
