@@ -95,6 +95,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:system/etc/permissions/android.software.midi.xml
 
+# Audio configuration file
+-include $(TOPDIR)hardware/qcom/audio/configs/msm8916_64/msm8916_64.mk
+
 #ANT+ stack
 PRODUCT_PACKAGES += \
     AntHalService \
@@ -197,10 +200,6 @@ PRODUCT_SUPPORTS_VERITY := false
 
 PRODUCT_PACKAGES += \
     vendor.display.color@1.0-service
-
-# Fingerprint feature
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml \
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
